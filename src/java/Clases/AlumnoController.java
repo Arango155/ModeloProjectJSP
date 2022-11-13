@@ -1,9 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package Clases;
 
+package Clases;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,7 +11,7 @@ import java.sql.SQLException;
  * @author JP
  */
 public class AlumnoController {
-      Alumno[] tablaALumno;
+      Alumno[] tablaAlumno;
     int indiceArray;
     private ConexionBaseDeDatos conectorBD;
     private Connection conexion;
@@ -23,96 +19,52 @@ public class AlumnoController {
     private ResultSet result = null;
     
     public AlumnoController(){
-        this.tablaALumno = new Alumno[100];
+        this.tablaAlumno = new Alumno[100];
         this.indiceArray=0;
     }
     
      public void guardarAlumno(Alumno alumno){
-        this.tablaALumno[this.indiceArray]=alumno;  
+        this.tablaAlumno[this.indiceArray]=alumno;  
         this.indiceArray=this.indiceArray+1;
         // procedimiento para almacenar en la Base de Datos
     }
     
-    public Alumno[] getAlumnos(){
-        return this.tablaALumno;
+    public Alumno[] getAlumno(){
+        return this.tablaAlumno;
     }
     
     public void abrirConexion(){
         conectorBD= new ConexionBaseDeDatos();
         conexion=conectorBD.conectar();
-    }    
-   
+    }
     
-    public String guardarAlumno2(Alumno alumno){        
-        String sql = "INSERT INTO universidad.alumno(numero_carne, nombre, correo, direccion, telefono, genero_idgenero) ";
-             sql += " VALUES(?,?,?,?,?,?)";              
-       try{     
+    public boolean getAlumno2(Alumno alumno){        
+        String sql = "INSERT INTO universidad.alumno(numero_carne, nombre, correo, telefono, direccion, genero_idgenero) ";
+             sql += " VALUES(?,?,?,?,?,?)"; 
+        try{
             abrirConexion();
             statement = conexion.prepareStatement(sql); 
-            statement.setInt(1, alumno.getCodigo());
+            statement.setInt(1, alumno.getNumero_carne());
             statement.setString(2, alumno.getNombre());
             statement.setString(3, alumno.getCorreo());
-            statement.setString(4, alumno.getDireccion());
-            statement.setString(5, alumno.getTelefono());
-            statement.setInt(6, alumno.getTipo());
-                int resultado = statement.executeUpdate(); 
+            statement.setString(4, alumno.getTelefono());
+            statement.setString(5, alumno.getDireccion());
+            statement.setInt(6, alumno.getGenero_idgenero());
+             int resultado = statement.executeUpdate(); 
                 if(resultado > 0){
-                    return String.valueOf(resultado);
+                    return true;
                 }else{
-                    return String.valueOf(resultado);
+                    return false;
                 }
-        }catch(SQLException e){ 
-            return e.getMessage();
-        }
+        }catch(SQLException e){
+            String error = e.getMessage();  
+            return false;
+        }    
     }
     
-    public void getAlumnos2(StringBuffer respuesta){   
-        String sql="select * from universidad.alumno";
-        try{
-        abrirConexion();
-        respuesta.setLength(0); 
-        statement= conexion.prepareStatement(sql);                        
-        result = statement.executeQuery();            
-            if (result!=null){
-                while (result.next()){
-                respuesta.append("<tr>");
-                respuesta.append("<td >").append(result.getString("numero_carne")).append("</td>");
-                respuesta.append("<td >").append(result.getString("nombre")).append("</td>");
-                respuesta.append("<td >").append(result.getString("direccion")).append("</td>");
-                respuesta.append("<td >").append(result.getString("correo")).append("</td>");
-                respuesta.append("<td >").append(result.getString("telefono")).append("</td>");
-                  respuesta.append("<td >").append(result.getString("genero_idgenero")).append("</td>");
-                respuesta.append("<td id=\"").append(result.getString("numero_carne"))
-                        .append("\"  onclick=\"eliminarAlumno(this.id);\">") 
-                         //.append("\"  onclick=\"eliminarAlumno("+result.getString("numero_carne")+");\">") 
-                        .append(" <a class=\"btn btn-warning\"'><i class=\"fas fa-edit\"></i>  </a>"
-                                +" <a class=\"btn btn-danger\"'> <i class=\"fas fa-trash-alt\"></i> </a>"
-                                + " <td></tr>");
-                }
-            }else{
-                respuesta.append("error al consultar");
-            }
-        }
-        catch(SQLException ex){
-            ex.printStackTrace();
-        }
-    }
+     
     
-    public String eliminarALumno(int carne){        
-        String sql = "DELETE FROM alumno WHERE numero_carne="+carne;              
-       try{     
-            abrirConexion();
-            statement = conexion.prepareStatement(sql); 
-            int resultado = statement.executeUpdate();
-            if(resultado > 0){
-                return String.valueOf(resultado);
-            }else{
-                return String.valueOf(resultado);
-            }
-        }catch(SQLException e){ 
-            return e.getMessage();
-        }
-    }
     
     
 }
+

@@ -1,3 +1,10 @@
+<%-- 
+    Document   : home
+    Created on : Nov 11, 2022, 9:26:18 PM
+    Author     : jdara
+--%>
+
+
 
 <%@page import="Clases.ConexionBaseDeDatos"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -65,7 +72,7 @@
               
               
                    
-                    <%
+                      <%
                               ConexionBaseDeDatos conn = new ConexionBaseDeDatos();
                               Statement smt;
                               ResultSet rs;
@@ -175,43 +182,77 @@
                     <br>
                     <div  >
    <form class="form-register"   method="POST"  id="form" name="form"  >
-               <h1>Añadir alumno</h1>
+              
+        <h1>Registro de Alumnos</h1>
+        <br>
+        
             <div class="form-group">
                 <label for="exampleInputName">Codigo</label>
-                <input class="form-control" type="text"  name="codigo" id="codigo" >
-                <input type="hidden" name="control" value="GUARDAR">
+                <input class="form-control" type="text"  name="numero_carne" id="numero_carne" >
             </div>
             <div class="form-group">
-                <label for="exampleInputName">Nombre del alumno</label>
-                <input class="form-control" type="text" name="nombre" id="nombre" >
+                <label for="exampleInputName">Nombre</label>
+                <input class="form-control" type="text"  name="nombre" id="nombre" >
             </div>
+        
+        <div class="form-group">
+                <label for="exampleInputName">Correo</label>
+                <input class="form-control" type="text"  name="correo" id="correo" >
+            </div>
+        
+         <div class="form-group">
+                <label for="exampleInputName">Telefono</label>
+                <input class="form-control" type="text"  name="telefono" id="telefono" >
+            </div>
+        
             <div class="form-group">
-              <label for="exampleInputEmail1">Email address</label>
-              <input type="email" class="form-control"  aria-describedby="emailHelp" name="correo" id="correo"  >
-         
+                <label for="exampleInputName">Direccion</label>
+                <input class="form-control" type="text"  name="direccion" id="direccion" >
             </div>
-            <div class="form-group">
-              <label for="exampleInputPassword1">Direccion</label>
-              <input type="text" class="form-control"  name="direccion" id="direccion"  >
-            </div>
-               
-                <div class="form-group">
-              <label for="exampleInputPassword1">Telefono</label>
-              <input type="text" class="form-control"  name="telefono" id="direccion"  >
-            </div>
-            
-            <select class="form-control" name="opcion">
+           
+         <select class="form-control" name="genero_idgenero">
                 <option value="1">Opción 1</option>
                 <option value="2">Opción 2</option>
-            </select><br>
+            </select>
+            
+            <br>
+            
+        
+            
+           
             
           <form class="d-flex" role="search">
-              <input type="submit" value="Enviar Formulario" onclick="enviarFormularioOpcion2();" class="btn btn-info" id="btn3">
-                                      
-                                        </form>  
+             
+              <button type="submit" onclick="enviarFormularioOpcionAlumno()" class="btn btn-info">Enviar formulario</button>
+                                       </form> 
+                                        
                 
-                
-            
+
+            <script>  function enviarFormularioOpcionAlumno(){
+	const XHR = new XMLHttpRequest();
+	  var formData = new URLSearchParams(new FormData(document.getElementById('form'))).toString();
+         
+	  // Define what happens in case of error
+	  XHR.addEventListener('error', (event) => {
+	    alert('Oops! Something went wrong.');
+	  });
+
+	  // Set up our request
+	  XHR.open('POST', 'NewServletAlumno', true);
+          XHR.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+          
+          XHR.onload = () => {
+            if (XHR.readyState === XHR.DONE && XHR.status === 200) {
+              console.log("response => " + XHR.response);
+              //console.log("response xml=> " + XHR.responseXML);
+              document.getElementById('bodyTable').innerHTML=XHR.response;
+              mostrarMensaje();
+              limpiarFormulario();
+            }
+          };
+          
+          XHR.send(formData);         
+}</script>
         </form>   
         </div>
                     
@@ -220,11 +261,11 @@
                     
                      <div class="container mx-auto">
                               <div class="container my-5">
-                                        <center><h1 class="">Tabla alumnos</h1></center>
+                                        <center><h1 class="">Tabla alumno</h1></center>
                               </div>
                               <div class="d-flex justify-content-between mx-5 my-4">
                                         <form class="d-flex" role="search">
-                                       <input  class="btn btn-success" type="submit" value="Mostrar todos los alumnos">
+                                       <input  class="btn btn-success" type="submit" value="Mostrar todos los cursos">
                                         </form>
                                        
                                        <form class="d-flex" role="search">
@@ -232,7 +273,12 @@
                                                   <input class="btn btn-warning" type="submit" value="Buscar">
 
                                         </form>
-                                        <%
+                                  
+                                  
+                                  
+                                                            
+                                  
+                                          <%
                                                   String nameSearch = request.getParameter("txtSearch");
                                                   if (nameSearch != null) {
                                                             smt = conn.conectar().createStatement();
@@ -252,13 +298,14 @@
                                         <table class="table table-hover table-dark">
                                             <thead>
                                                   <tr>
-                                                            <th scope="col">Carne</th>
+                                                             <th scope="col">Carne</th>
                                                             <th scope="col">Nombre</th>
                                                             <th scope="col">Correo</th>
                                                             <th scope="col">Telefono</th>
                                                             <th scope="col">Direccion</th>
                                                             <th scope="col">Tipo</th>
                                                             <th scope="col">Acciones</th>
+                                                            
                                                   </tr>
                                                   <%
                                                             while (rs.next()) {
@@ -270,6 +317,7 @@
                                                             <td><%= rs.getString("telefono")%></td>
                                                             <td><%= rs.getString("direccion")%></td>
                                                             <td><%= rs.getString("genero_idgenero")%></td>
+                                                           
                                                             <td>
                                                                       <a href="edit.jsp?id=<%= rs.getInt("numero_carne")%>" class="btn btn-outline-light">Editar</a>
                                                                       <a href="delete.jsp?id=<%= rs.getInt("numero_carne")%>" class="btn btn-danger">Eliminar</a>

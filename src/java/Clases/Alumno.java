@@ -1,33 +1,32 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package Clases;
 
 public class Alumno {
-    private int codigo;
+    private int numero_carne;
     private String nombre;
     private String correo;
+    private String telefono;
     private String direccion;
-     private String telefono;
-    private int tipo;
+    private int genero_idgenero;
+   
 
     
-    public Alumno(int codigo, String nombre, String correo, String direccion, String telefono, int tipo){
-        this.codigo=codigo;
+    public Alumno(int numero_carne, String nombre, String correo, String telefono, String direccion, int genero_idgenero){
+        this.numero_carne=numero_carne;
         this.nombre=nombre;
         this.correo=correo;
-        this.direccion=direccion;     
         this.telefono=telefono;
-        this.tipo=tipo;   
+        this.direccion=direccion;
+        this.genero_idgenero=genero_idgenero;
+        
     }
 
-    public int getCodigo() {
-        return codigo;
+    public int getNumero_carne() {
+        return numero_carne;
     }
 
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
+    public void setNumero_carne(int numero_carne) {
+        this.numero_carne = numero_carne;
     }
 
     public String getNombre() {
@@ -46,14 +45,6 @@ public class Alumno {
         this.correo = correo;
     }
 
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
-
     public String getTelefono() {
         return telefono;
     }
@@ -62,14 +53,24 @@ public class Alumno {
         this.telefono = telefono;
     }
 
-    public int getTipo() {
-        return tipo;
+    public String getDireccion() {
+        return direccion;
     }
 
-    public void setTipo(int tipo) {
-        this.tipo = tipo;
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
-    
-    
 
+    public int getGenero_idgenero() {
+        return genero_idgenero;
+    }
+
+    public void setGenero_idgenero(int genero_idgenero) {
+        this.genero_idgenero = genero_idgenero;
+    }
+
+    
+    
+    
+    
 }

@@ -1,8 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
-
 
 import Clases.Alumno;
 import Clases.AlumnoController;
@@ -15,12 +10,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(urlPatterns = {"/NewServlet2"})
-public class NewServlet2 extends HttpServlet {
+
+@WebServlet(urlPatterns = {"/NewServletAlumno"})
+public class NewServletAlumno extends HttpServlet {
     Alumno alumno;
     AlumnoController registroAlumno;
-     Alumno[] alumnosRegistrados;
-     StringBuffer objetoRespuesta = new StringBuffer();
+     Alumno[] AlumnosRegistrados;
+
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,33 +40,32 @@ public class NewServlet2 extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter respuesta = response.getWriter()) {            
-           
-           registroAlumno=new AlumnoController();
-           String control = request.getParameter("control");
-           
-           if(control.toUpperCase().equals("GUARDAR")){
-               alumno=new Alumno(
-                Integer.parseInt(request.getParameter("codigo")),
+            alumno=new Alumno(
+  
+                     Integer.parseInt(request.getParameter("numero_carne")),
                 request.getParameter("nombre"),
-                request.getParameter("correo"),
-                request.getParameter("direccion"),
-                       request.getParameter("telefono"),
-                Integer.parseInt(request.getParameter("opcion")));                
-                registroAlumno.guardarAlumno2(alumno);//almacenarlo en BD                 
-           }else if(control.toUpperCase().equals("ELIMINAR")){
-               int codigoEliminar= Integer.parseInt(request.getParameter("codigo_alumno"));
-               registroAlumno.eliminarALumno(codigoEliminar);
-           }
+                    request.getParameter("correo"),
+                     request.getParameter("telefono"),
+                 request.getParameter("direccion"),
+                    Integer.parseInt(request.getParameter("genero_idgenero"))
+                
+            );               
                         
-            
-            //registroAlumno.guardarAlumno(alumno);//almacenarlo en el array
-            //alumnosRegistrados= registroAlumno.getAlumnos();// consultar alumnos en el array                       
-                    
-           registroAlumno.getAlumnos2(objetoRespuesta);//consultar alumnos en la BD
-           respuesta.write(objetoRespuesta.toString());             
-            
+            if(registroAlumno==null){
+                 registroAlumno=new AlumnoController();
+            }
            
+            registroAlumno.guardarAlumno(alumno);//almacenarlo en el array
             
+           if(registroAlumno.getAlumno2(alumno)){//almacenarlo en BD
+               respuesta.println(1);
+           }else{
+               respuesta.println(0);
+           }
+            AlumnosRegistrados= registroAlumno.getAlumno();           
+           
+           
+            //respuesta.println(1);
         }
     }
 
