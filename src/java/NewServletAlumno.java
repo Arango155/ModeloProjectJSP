@@ -42,12 +42,12 @@ public class NewServletAlumno extends HttpServlet {
         try ( PrintWriter respuesta = response.getWriter()) {            
             alumno=new Alumno(
   
-                     Integer.parseInt(request.getParameter("numero_carne")),
+                Integer.parseInt(request.getParameter("numero_carne")),
                 request.getParameter("nombre"),
-                    request.getParameter("correo"),
-                     request.getParameter("telefono"),
-                 request.getParameter("direccion"),
-                    Integer.parseInt(request.getParameter("genero_idgenero"))
+                request.getParameter("correo"),
+                request.getParameter("telefono"),
+                request.getParameter("direccion"),
+                Integer.parseInt(request.getParameter("genero_idgenero"))
                 
             );               
                         

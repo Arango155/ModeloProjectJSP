@@ -59,17 +59,7 @@ public class NewServletCurso extends HttpServlet {
            }
             CursosRegistrados= registroCurso.getCurso();           
            
-            for (int i = 0; i < CursosRegistrados.length; i++){
-                    if(CursosRegistrados[i].getCodigo_curso()>0){
-                       respuesta.println("<tr><td>" + CursosRegistrados[i].getCodigo_curso()+ "</td>");
-                       respuesta.println("<td>" + CursosRegistrados[i].getNombre() + "</td>");
-                      
-                       respuesta.println("<td>"
-                               + "<button type=\"button\" class=\"btn btn-warning\"></i>Editar</button> "
-                               + "<button type=\"button\" class=\"btn btn-danger\" onclick=\"eliminarLibro()\">Eliminar</button>"
-                               + "</td></tr>");
-                    }
-                }
+            
             //respuesta.println(1);
         }
     }
