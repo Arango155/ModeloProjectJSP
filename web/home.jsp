@@ -188,26 +188,26 @@
         
             <div class="form-group">
                 <label for="exampleInputName">Codigo</label>
-                <input class="form-control" type="text"  name="numero_carne" id="numero_carne" >
+                <input class="form-control" type="text"  name="numero_carne"  >
             </div>
             <div class="form-group">
                 <label for="exampleInputName">Nombre</label>
-                <input class="form-control" type="text"  name="nombre" id="nombre" >
+                <input class="form-control" type="text"  name="nombre"  >
             </div>
         
         <div class="form-group">
                 <label for="exampleInputName">Correo</label>
-                <input class="form-control" type="text"  name="correo" id="correo" >
+                <input class="form-control" type="text"  name="correo"  >
             </div>
         
          <div class="form-group">
                 <label for="exampleInputName">Telefono</label>
-                <input class="form-control" type="text"  name="telefono" id="telefono" >
+                <input class="form-control" type="text"  name="telefono"  >
             </div>
         
             <div class="form-group">
                 <label for="exampleInputName">Direccion</label>
-                <input class="form-control" type="text"  name="direccion" id="direccion" >
+                <input class="form-control" type="text"  name="direccion"  >
             </div>
            
          <select class="form-control" name="genero_idgenero">

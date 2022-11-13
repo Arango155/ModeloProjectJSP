@@ -34,11 +34,11 @@
                 
             <div class="form-group">
               <label for="exampleInputEmail1" >Ingrese usuario</label>
-              <input type="text" class="controls1" name="user" id="user" aria-describedby="emailHelp">
+              <input type="text" class="controls1" name="user"  aria-describedby="emailHelp">
             </div>
             <div class="form-group">
               <label for="exampleInputPassword1">Ingrese su contraseña</label>
-              <input type="password" class="controls1" name="pass" id="pass" ">
+              <input type="password" class="controls1" name="pass"  >
             </div>
             
                  <button type="submit" value="Login" class="botons">Iniciar Sesion</button>
