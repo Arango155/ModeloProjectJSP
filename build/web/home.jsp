@@ -31,11 +31,8 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-        <link href="css/estilos.css" rel="stylesheet" type="text/css"/>
-        
-         
-        <script src="js/script.js"></script>
-              
+        <script src="script.js" type="text/javascript"></script>
+        <link href="estilos.css" rel="stylesheet" type="text/css"/>
           </head>
           
              <% 
@@ -228,31 +225,6 @@
                                         
                 
 
-            <script>  function enviarFormularioOpcionAlumno(){
-	const XHR = new XMLHttpRequest();
-	  var formData = new URLSearchParams(new FormData(document.getElementById('form'))).toString();
-         
-	  // Define what happens in case of error
-	  XHR.addEventListener('error', (event) => {
-	    alert('Oops! Something went wrong.');
-	  });
-
-	  // Set up our request
-	  XHR.open('POST', 'NewServletAlumno', true);
-          XHR.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-          
-          XHR.onload = () => {
-            if (XHR.readyState === XHR.DONE && XHR.status === 200) {
-              console.log("response => " + XHR.response);
-              //console.log("response xml=> " + XHR.responseXML);
-              document.getElementById('bodyTable').innerHTML=XHR.response;
-              mostrarMensaje();
-              limpiarFormulario();
-            }
-          };
-          
-          XHR.send(formData);         
-}</script>
         </form>   
         </div>
                     

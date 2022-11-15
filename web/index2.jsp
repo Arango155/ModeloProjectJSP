@@ -16,11 +16,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        
-        <script src="js/script.js" type="text/javascript"></script>
-       
-        
+        <link href="estilos.css" rel="stylesheet" type="text/css"/>
+        <script src="script.js" type="text/javascript"></script>
     </head>
     <body>  
         
@@ -53,42 +50,7 @@
      
         </div>
     </body>
-    <script>function enviarFormularioOpcionLog(){
-	const XHR = new XMLHttpRequest();
-	  var formData = new URLSearchParams(new FormData(document.getElementById('form'))).toString();
-         
-	  // Define what happens in case of error
-	  XHR.addEventListener('error', (event) => {
-	    alert('Oops! Something went wrong.');
-	  });
-
-	  // Set up our request
-	  XHR.open('POST', 'NewServletLog', true);
-          XHR.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-          
-          XHR.onload = () => {
-            if (XHR.readyState === XHR.DONE && XHR.status === 200) {
-              console.log("response => " + XHR.response);
-              //console.log("response xml=> " + XHR.responseXML);
-              document.getElementById('bodyTable').innerHTML=XHR.response;
-              mostrarMensaje();
-              limpiarFormulario();
-            }
-          };
-          
-          XHR.send(formData);         
-}
-
-    function mostrarMensaje(){
-  Swal.fire({
-  icon: 'success',
-  title: 'Usuario guardado exitosamente',
-  showConfirmButton: false,
-  timer: 1500
-})
-}
     
-    </script>
 </html>
 
 
